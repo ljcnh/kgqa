@@ -1,0 +1,14 @@
+webName = "KBQA"
+
+# possible values: DEBUG, INFO, WARNING, ERROR, FATAL
+logLevel = "DEBUG"
+
+[redis]
+ip = "82.156.183.226"
+port = 6379
+#user = "none"
+password = "ljwudao5"
+maxIdle = 10
+maxActive = 20
+idleTimeout = 10
+
