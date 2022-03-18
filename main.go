@@ -1,26 +1,56 @@
 package main
 
-import (
-	"fmt"
-	"github.com/gomodule/redigo/redis"
-	_ "kgqa/global"
-	"reflect"
-	"strconv"
-)
-
-const pi float32 = 89.89877
-const zero = 0.0
+//  Category 的判断  需要到时候做出规定
 
 func main() {
-	a := 0.0
-	fmt.Println(reflect.TypeOf(a), reflect.ValueOf(a).Kind())
-	fmt.Println(reflect.TypeOf(zero), reflect.ValueOf(zero).Kind())
+	/*	answer := ruleMatch.Answer{
+			SpaceID:    0,
+			CategoryId: 1,
+			AnsPro: &ruleMatch.AnswerProperty{
+				VarDefinition: &ruleMatch.VarDefinition{
+					VarName:  "X",
+					VarValue: "C++程序设计实践",
+					GraphNode: &ruleMatch.GraphNode{
+						BelongEntity: "course",
+						PropertyName: "name",
+					},
+				},
+				AnsPropertyName: "created_at",
+			},
+			AnsByRel: nil,
+		}
+		gql, _ := global.Templates.RuleToNGQL(&answer)
+		fmt.Println(gql)
+		answer1 := ruleMatch.Answer{
+			SpaceID:    0,
+			CategoryId: 2,
+			AnsPro:     nil,
+			AnsByRel: &ruleMatch.AnswerByRelation{
+				VarDefinition: &ruleMatch.VarDefinition{
+					VarName:  "X",
+					VarValue: "C++程序设计实践",
+					GraphNode: &ruleMatch.GraphNode{
+						BelongEntity: "course",
+						PropertyName: "name",
+					},
+				},
+				RelationShip:    "course_exercise",
+				IsPositive:      0,
+				AnsPropertyName: "publish_time",
+			},
+		}
+		gql, _ = global.Templates.RuleToNGQL(&answer1)
+		fmt.Println(gql)*/
+	//rule := "<?x>的<?阿斯顿撒旦>[联系方式|电话](是[什么|啥](啊)?<?阿斯顿撒旦>)?"
+	//newRule := ruleMatch.Preprocessing(rule)
+	//fmt.Println(newRule)
+	//rule = "<?x>[联系方式<?sca>|电话<?sdsd速度>](是[什么|啥](啊)?)?"
+	//newRule = ruleMatch.Preprocessing(rule)
+	//fmt.Println(newRule)
 
-	//fmt.Println(rules.GetAllRules("key"))
-	//fmt.Println(rules.GetAllRules("xcxc"))
-
-	//rules.GetAllRules("key")
-	//rules.GetAllRules("xcxc")
+	//rule := `<!x>的[联系方式|电话](是[什么|啥](啊)?)?`
+	//text := "罗老师的联系方式是啥"
+	//fmt.Println(ruleMatch.RegularMatch(rule, text))
 	//fmt.Println(global.Seg.CutDeduplication("gse 是 结巴 分词 jieba 的 golang 实现 并 尝试 添加 nlp 功能 和 更多 属性 g s e j i b a o l n p"))
 }
 
@@ -48,17 +78,3 @@ func main() {
 //}
 //time.Sleep(3 * time.Second)
 //}
-func getConnFromPoolAndHappy(pool *redis.Pool, i int) {
-	//通过连接池获得连接
-	conn := pool.Get()
-	//延时关闭连接
-	defer conn.Close()
-	//使用连接操作数据
-	reply, err := conn.Do("set", "conn"+strconv.Itoa(i), i)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	s, _ := redis.String(reply, err)
-	fmt.Println(s)
-}

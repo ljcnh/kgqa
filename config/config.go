@@ -24,22 +24,26 @@ type RDConfig struct {
 	DefaultDB   int    `mapstructure:"defaultDB"`
 }
 
-func Init(config *Config) {
-	viper.SetConfigType("toml")
-	viper.AddConfigPath("./config")
-	viper.SetConfigName("config")
-	err := viper.ReadInConfig()
+func InitConfig(config *Config) {
+	c := viper.New()
+	c.SetConfigType("toml")
+	c.AddConfigPath("./config")
+	c.SetConfigName("config")
+	err := c.ReadInConfig()
 	if err != nil {
 		log.Fatalf("读取配置文件失败: %v", err)
 	}
-	if err := viper.Unmarshal(config); err != nil {
+	if err := c.Unmarshal(config); err != nil {
 		log.Fatalf("解析配置文件失败 错误:%s \n", err)
 	}
-	viper.WatchConfig()
-	viper.OnConfigChange(func(in fsnotify.Event) {
+	c.WatchConfig()
+	c.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Println("配置文件已被修改")
-		if err := viper.Unmarshal(config); err != nil {
+		if err := c.Unmarshal(config); err != nil {
 			log.Fatalf("解析配置文件失败 错误:%s \n", err)
 		}
 	})
+}
+
+func InitTemplate() {
 }
